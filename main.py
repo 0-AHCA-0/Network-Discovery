@@ -59,3 +59,27 @@ else:
     ruta_infiltracion = herramienta.dfs(red, nodo_inicio)
     print(f"   {ruta_infiltracion}")
 
+    ## MENU PARA ESCOGER ENTRE AMBOS ALGORITMOS
+    while True:
+        print("Seleccione un algoritmo..\n")
+        print("1. DFS")
+        print("2. BFS")
+        print("3. Salir")
+
+        opcion = input("Elija una opción del 1 al 3...\t").strip()
+        
+        match opcion:
+            case '1': 
+                print("Empezando la ejecución con DFS...\n")
+                ruta_infiltracion = herramienta.dfs(red, nodo_inicio)
+                print(f"Ruta: {ruta_infiltracion}")
+            case '2':
+                print("Empezando la ejecución con BFS...\n")
+                ruta_infiltracion = herramienta.bfs(red, nodo_inicio)
+                print(f"Ruta: {ruta_infiltracion}")
+            case '3':
+                print("Saliendo del programa...")
+                break
+            case _:
+                print("No se reconocio el comando ingresado, intentelo de nuevo.")
+
