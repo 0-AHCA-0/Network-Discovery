@@ -5,7 +5,9 @@ from collections import deque
 class Algoritmos:
     #Obtenemos el inicio del grafo
     def dfs(self, grafo, inicio):
+        
         inicio = grafo.nodos.get(inicio)
+        
         #Si no existe un nodo valido paramos
         if not inicio: return []
         
@@ -15,6 +17,8 @@ class Algoritmos:
         #Guardamos el orden de los comprometidos en la red
         orden_descubrimiento = []
 
+        print("\n RECORRIDO DFS")
+
         #inicio de la funcion recursiva
         def inicio_dfs(nodo):
             #Entra al nodo actual
@@ -22,18 +26,31 @@ class Algoritmos:
             #Agregamos el nodo en decubiertos (hackeados)
             orden_descubrimiento.append(nodo.nombre)
             
+            # Muestra en consola el nodo hackeado actualmente
+            print(f"\n[ENTRANDO] Nodo actual: {nodo.nombre}")
+            print(f"-> Nodos hackeados hasta ahora: {orden_descubrimiento}")
+            
             #iteramos en los nodos conectados
             for arista in grafo.lista_adyacencia[nodo]:
                 #Revisa elementos conectados del vecino
                 vecino = arista.destino
                 
+                print(f"   Revisando cable desde {nodo.nombre} hacia: {vecino.nombre}")
+                
                 #Verifica si ya se visito
                 #Si no esta visitado, busca en profundidad
                 if vecino not in visitados:
+                    print(f"   ¡El vecino {vecino.nombre} no esta visitado!")
                     inicio_dfs(vecino)
+                else:
+                    print(f"   VECINO IGNORADO. El vecino {vecino.nombre} ya fue hackeado antes.")
+            
+            # Al terminar los vecinos de esta rama, regresa al anterior
+            print(f" No hay mas cables nuevos en: {nodo.nombre}. Volviendo...")
         
         #Pasa el nodo actual para continuar con el algoritmo
         inicio_dfs(inicio)
+        
         #retorna la ruta 
         return orden_descubrimiento
     
@@ -54,10 +71,14 @@ class Algoritmos:
             # Convertimos los nombres en una lista limpia para imprimir sin errores
             nodos_nombres = [n.nombre for n in cola_busqueda]
             
+            # Imprimimos los nodos que estan esperando en la cola usando el list
+            print("Nodos en cola para ser buscados: ", list(nodos_nombres))
             
             nodo_actual = cola_busqueda.popleft() # Sacamos el primer nodo de la cola
             recorrido_BFS.append(nodo_actual.nombre)
             
+            # Imprimimos el nodo que se esta revisando en este turno
+            print("Nodo actual: ", nodo_actual.nombre)
             
             #Si el usuario paso un nodo objetivo
             if nodo_objetivo and nodo_actual.nombre == nodo_objetivo:
@@ -69,7 +90,8 @@ class Algoritmos:
                 vecino = arista.destino
                 # si el vecino no esta en nuestra lista de buscados..
                 if vecino not in nodos_buscados:
-                    
+                    # Imprimimos el nuevo vecino que acabamos de descubrir
+                    print(f"Nuevo nodo sin visitar {vecino.nombre}")
                     nodos_buscados.append(vecino)
                     cola_busqueda.append(vecino)
             

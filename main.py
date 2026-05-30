@@ -1,39 +1,21 @@
 from Grafo_Seguridad import Grafo
 from Algoritmos_Infiltracion import Algoritmos
+'''
+No vi que decia grafo en un archivo. asi que se borro todas las cargas manuales.
+'''
 
 # instanciamos Grafo en red corporativa 
 red = Grafo()
 
-#AGREGAMOS LOS COMPONENTES DE LA RED
+#AGREGAMOS LOS COMPONENTES DE LA RED (MEDIANTE JSON)
 
-# Conexiones desde el Router Principal
-red.conectar_aristas("Router1", "Internet")
-red.conectar_aristas("Router1", "Distro_Switch3")
-red.conectar_aristas("Router1", "Distro_Switch4")
+print("Cargando infraestructura de red corporativa...")
 
-# Cable de conexion entre switches de Distribucion
-red.conectar_aristas("Distro_Switch3", "Distro_Switch4")
-
-# Servidor DHCP conectado a Distro 3
-red.conectar_aristas("Distro_Switch3", "Winserver_DHCP")
-
-# Enlaces cruzados entre capa de Distribucion y capa de Acceso
-red.conectar_aristas("Distro_Switch3", "Access_Switch1")
-red.conectar_aristas("Distro_Switch3", "Access_Switch2")
-red.conectar_aristas("Distro_Switch3", "Access_Switch3")
-
-red.conectar_aristas("Distro_Switch4", "Access_Switch1")
-red.conectar_aristas("Distro_Switch4", "Access_Switch2")
-red.conectar_aristas("Distro_Switch4", "Access_Switch4")
-
-# Capa de Acceso conectando a las computadoras VPC
-red.conectar_aristas("Access_Switch1", "VPC1")
-red.conectar_aristas("Access_Switch1", "VPC3")
-red.conectar_aristas("Access_Switch2", "VPC4")
-red.conectar_aristas("Access_Switch3", "VPC5")
-red.conectar_aristas("Access_Switch3", "VPC6")
-red.conectar_aristas("Access_Switch4", "VPC7")
-red.conectar_aristas("Access_Switch4", "VPC8")
+if red.cargar_archivo("red.json"):
+    print("Red cargada con exito desde archivo JSON.\n")
+else:
+    print("No se pudo iniciar la simulacion sin datos de red.")
+    exit()
 
 #Inicializamos los algoritmos de busqueda 
 herramienta = Algoritmos()

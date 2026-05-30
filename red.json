@@ -1,0 +1,22 @@
+{
+  "enlaces": [
+    ["Router1", "Internet"],
+    ["Router1", "Distro_Switch3"],
+    ["Router1", "Distro_Switch4"],
+    ["Distro_Switch3", "Distro_Switch4"],
+    ["Distro_Switch3", "Winserver_DHCP"],
+    ["Distro_Switch3", "Access_Switch1"],
+    ["Distro_Switch3", "Access_Switch2"],
+    ["Distro_Switch3", "Access_Switch3"],
+    ["Distro_Switch4", "Access_Switch1"],
+    ["Distro_Switch4", "Access_Switch2"],
+    ["Distro_Switch4", "Access_Switch4"],
+    ["Access_Switch1", "VPC1"],
+    ["Access_Switch1", "VPC3"],
+    ["Access_Switch2", "VPC4"],
+    ["Access_Switch3", "VPC5"],
+    ["Access_Switch3", "VPC6"],
+    ["Access_Switch4", "VPC7"],
+    ["Access_Switch4", "VPC8"]
+  ]
+}
